@@ -6,7 +6,35 @@ function onReady() {
     $('#addButton').on('click', addDailyTask);
     getTask();
     $(document).on('click', '.deleteButton', removeTask)
+    $(document).on('click', '.statusButton', isCompleted)
 }// end function inReady
+
+function isCompleted() {
+    let id = $(this).parents('tr').data('id');
+    console.log(id);
+    let complete_status = $(this).parents('tr').data('complete_status');
+    let isCompleted = true
+    $.ajax({
+      method: 'PUT',
+      // id get put into req.params
+      url: `/todos/${id}`,
+      data: {
+        status: isCompleted
+      }
+  })
+  .then(() => {
+      console.log('PUT success!');
+  
+      // reload our state from the server
+      getTask();
+  })
+  .catch((err) => {
+      console.log('PUT failed', err);
+  
+  })
+  
+  }
+  
   
 
 function removeTask() {
@@ -75,6 +103,7 @@ function render(array) {
             <td>${todo.task}</td>
             <td>${todo.importance}</td>
             <td>${todo.date}</td>
+            <td>${todo.complete_status}</td>
             <td><button class="statusButton">Completed</button><td>
             <td><button class="deleteButton">Delete</button><td>
         </tr>
