@@ -61,4 +61,17 @@ VALUES
 
 // DELETE ... Remove a task when delete button is pressed after completion
 
+todoRouter.delete('/:id', (req, res) => {
+    console.log('id is',req.params.id);
+    const queryText = `DELETE FROM todos WHERE id = $1 `; //SQL code here, use $1, $2 in conjunction with the query params
+    let queryParams = [req.params.id];
+    pool.query(queryText, queryParams)
+        .then((dbRes) => {
+            res.sendStatus(204);
+        })
+        .catch((err) => {
+        console.log('DELETE failed:', err);
+    })
+});
+
 module.exports = todoRouter;

@@ -5,9 +5,36 @@ function onReady() {
     console.log(('JQ'));
     $('#addButton').on('click', addDailyTask);
     getTask();
+    $(document).on('click', '.deleteButton', removeTask)
 }// end function inReady
+  
 
-
+function removeTask() {
+    console.log('let remove task', removeTask);
+    Swal.fire({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this!",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, delete it!'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				type: 'DELETE',
+				url: `/todos/${$(this).parents('tr').data('id')}`
+			}).then((res) => {
+					console.log('DELETE:', res);
+					getTask();
+			}).catch((err) => {
+					console.log('FAILED:', err);
+				});
+			Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+		}
+	});
+    
+} // end function removeTask
 
 
 
