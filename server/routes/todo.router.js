@@ -30,7 +30,7 @@ todoRouter.get('/', (req, res) => {
 // POST for todos 
 // Add a new task
 todoRouter.post('/', (req, res) => {
-    console.log('this is re.body', req.body);
+    console.log('this is req.body', req.body);
     let queryText =`
     INSERT INTO "todos" 
 	("task", "date", "importance") 
@@ -55,6 +55,30 @@ VALUES
 
 
 // PUT ... update a task to show it has been completed
+todoRouter.put('/:id', (req, res) => {
+    // Grab the URL parameter
+    console.log('id is', req.params.id);
+    console.log('req.body', req.body);
+    let queryText = `
+    UPDATE "todos"
+    SET "complete_status" = $1
+    WHERE "id" = $2;
+    `;
+    let queryParams = [
+        req.body.status,                     //$1
+        req.params.id                       //$2
+    ];
+
+    pool.query(queryText, queryParams)
+    .then(() =>{
+        res.sendStatus(204);
+    })
+    .catch((err) => {
+        console.log('PUT /todos failed!', err);
+        res.sendStatus(500);
+    });
+})
+  
 
 
 
