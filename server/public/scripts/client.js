@@ -53,7 +53,6 @@ function removeTask() {
 				type: 'DELETE',
 				url: `/todos/${$(this).parents('tr').data('id')}`
 			}).then((res) => {
-					console.log('DELETE:', res);
 					getTask();
 			}).catch((err) => {
 					console.log('FAILED:', err);
