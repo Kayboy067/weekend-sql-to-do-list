@@ -10,7 +10,39 @@
     <script src="scripts/client.js"></script>
 </head>
 <body>
-    <h1>To Do List</h1>
+    <header>
+        <h1>To Do List</h1>
+    </header>
+    <form id="addTask">
+    
+        <input type="text" placeholder="task to be done......." id="dailyTask" size="60" required>
+        <input type="text" id="dateIs" placeholder="Date">
+        <select id="importanceId">
+            <option>High</option>
+            <option>Mid</option>
+            <option>Low</option>
+        </select>
+        <span><button class="addBtn" id="addButton">Add Task</button></span>
+        </section>
+    </form>
+    <div class="morningTask">
+        <h3><strong>Add Daily Morning Task</strong></h3>
+    </div>
+    <div>
+        <h2><u>My Task List</u></h2>
+    </div>
+        <table id = "taskTable">
+          <thead>
+            <tr>
+              <th>Tasks</th>
+              <th>Importance</th>
+              <th>Completed-Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+          </tbody>
+        </table>
     
 </body>
 </html>

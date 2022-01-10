@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Kayboy067/weekend-sql-to-do-list#readme",
   "dependencies": {
+    "bp": "^0.1.1-beta",
     "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1"
   }
 }
